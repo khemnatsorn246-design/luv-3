@@ -249,7 +249,7 @@ button{
   </div>
 
   <div class="letter-card hidden" id="letterCard">
-    <div class="letter-header">💌 ถึงคนพิเศษของเรา</div>
+    <div class="letter-header">💌 ถึงคนน่ารักของเค้า</div>
     <div class="letter-body" id="letterText"></div>
 
     <div class="letter-question hidden" id="question">
@@ -372,7 +372,7 @@ function typeLetter(){
     if(i>=letterContent.length){
       clearInterval(t);
       fadeOutMusic();
-      setTimeout(showQuestion,800);
+       waitForScrollEnd();
     }
   },40);
 }
@@ -440,9 +440,25 @@ function confettiBurst(n){
     setTimeout(()=>h.remove(),3000);
   }
 }
+
+function waitForScrollEnd(){
+  const box=document.getElementById("letterText");
+
+  box.addEventListener("scroll",function check(){
+    const atBottom =
+      box.scrollTop + box.clientHeight >= box.scrollHeight - 5;
+
+    if(atBottom){
+      box.removeEventListener("scroll",check);
+      setTimeout(showQuestion,500); // โผล่แบบนุ่ม ๆ
+    }
+  });
+}
+
 </script>
 </body>
 </html>
+
 
 
 
